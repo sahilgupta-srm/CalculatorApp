@@ -64,6 +64,21 @@ class MainActivity : AppCompatActivity() {
         displaydata()
     }
     fun displaydata(){
+        val responseData=viewModel.getEquations()
+        Log.i("Mytag",responseData.toString())
+        responseData.observe(this, Observer {
+            if(it!=null){
+                listItemAdapter.setList(
+                    it
+                )
+                listItemAdapter.notifyDataSetChanged()
 
+            }
+            else{
+                Toast.makeText(applicationContext,"No Data Available", Toast.LENGTH_LONG).show()
+            }})
     }
+
+
 }
+
